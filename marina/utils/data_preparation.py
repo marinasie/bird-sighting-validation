@@ -26,7 +26,7 @@ def standardize_dtypes(df: pd.DataFrame):
 
 def standardize_column_names(df: pd.DataFrame):
     """
-    Changes the column names to our standardized (german) column names.
+    Changes the column names to our standardized column names.
     """
     df.columns = df.columns.str.lower()
     df.rename({'atlas_code_ch': 'atlas_code'}, axis='columns', inplace=True)
