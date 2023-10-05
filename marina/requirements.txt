@@ -5,3 +5,4 @@ seaborn~=0.12.2
 matplotlib~=3.7.1
 scikit-learn~=1.2.2
 geojson~=3.0.1
+shap~=0.42.1
