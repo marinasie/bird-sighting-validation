@@ -143,3 +143,15 @@ def standardize_data(df:pd.DataFrame, path_translator_species_names, eea_shapefi
     if adjust_ids:
         df = standardize_id_species(df, path_translator_species_ids)
     return df
+
+
+def extract_digits_from_str(input_string):
+    result_string = ''.join(filter(str.isdigit, input_string))
+    return int(result_string)
+
+
+def numerize_eea_grids(grid_ids: pd.Series) -> pd.Series:
+    """
+    Converts the EEA grid ids to numeric values.
+    """
+    return grid_ids.apply(extract_digits_from_str)
