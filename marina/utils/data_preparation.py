@@ -4,13 +4,47 @@ import pandas as pd
 import geopandas as gpd
 
 
+def map_atlas_code(atlas_code):
+    try:
+        if np.isnan(atlas_code):
+            return 0
+        atlas_code = int(atlas_code)
+        if 1 <= atlas_code <=3 or atlas_code==30:
+            return 1
+        elif 4 <= atlas_code <=10 or atlas_code==40:
+            return 2
+        elif 11 <= atlas_code <=20 or atlas_code==50:
+            return 3
+        return 0
+    except (ValueError, TypeError):
+        if atlas_code.startswith('A'):
+            return 1
+        elif atlas_code.startswith('B'):
+            return 2
+        elif atlas_code.startswith('C'):
+            return 3
+        return 0
+
+
+def condense_atlas_codes(codes: pd.Series) -> pd.Series:
+    """
+    Converts all atlas codes to the following code groups:
+    - no breeding (0)
+    - possible breeding (1)
+    - likely breeding (2)
+    - confirmed breeding (3)
+    """
+    return codes.apply(map_atlas_code)
+
+
 def get_delimiter(file_path, bytes = 4096):
     sniffer = csv.Sniffer()
     data = open(file_path, 'r').read(bytes)
     delimiter = sniffer.sniff(data).delimiter
     return delimiter
 
-def standardize_dtypes(df: pd.DataFrame):
+
+def standardize_dtypes(df: pd.DataFrame) -> pd.DataFrame:
     """
     Changes the column dtypes to our standardized column dtypes.
     """
@@ -24,7 +58,7 @@ def standardize_dtypes(df: pd.DataFrame):
     return df
 
 
-def standardize_column_names(df: pd.DataFrame):
+def standardize_column_names(df: pd.DataFrame) -> pd.DataFrame:
     """
     Changes the column names to our standardized column names.
     """
@@ -34,7 +68,7 @@ def standardize_column_names(df: pd.DataFrame):
     return df
 
 
-def standardize_date_format(df:pd.DataFrame, format):
+def standardize_date_format(df:pd.DataFrame, format) -> pd.DataFrame:
     """
     Changes the date format to our standardized format yyyy-mm-dd.
     """
@@ -43,7 +77,7 @@ def standardize_date_format(df:pd.DataFrame, format):
     return df
     
 
-def standardize_precisions(df:pd.DataFrame):
+def standardize_precisions(df:pd.DataFrame) -> pd.DataFrame:
     """
     Changes precision names to standardized precisions and drops other (minority) precision names.
     """
@@ -55,7 +89,7 @@ def standardize_precisions(df:pd.DataFrame):
     return df
 
 
-def standardize_id_species(df:pd.DataFrame, path_to_lookup_table):
+def standardize_id_species(df:pd.DataFrame, path_to_lookup_table)  -> pd.DataFrame:
     """
     Changes german species id to standardized species id's given by 'translation_species_id_de_vs_ch.csv'
     """
@@ -65,7 +99,7 @@ def standardize_id_species(df:pd.DataFrame, path_to_lookup_table):
     return df
 
 
-def standardize_name_species(df:pd.DataFrame, path_to_lookup_table):
+def standardize_name_species(df:pd.DataFrame, path_to_lookup_table)  -> pd.DataFrame:
     """
     Changes swiss species names to standardized names given by 'translation_species_names_de_vs_ch.csv'
     """
@@ -75,7 +109,7 @@ def standardize_name_species(df:pd.DataFrame, path_to_lookup_table):
     return df
 
 
-def assign_eea_grids(df:pd.DataFrame, eea_shapefile_path):
+def assign_eea_grids(df:pd.DataFrame, eea_shapefile_path)  -> pd.DataFrame:
     """
     Assigns an eea grid id to every data point based on the provided shapefile.
     """
@@ -96,7 +130,7 @@ def assign_eea_grids(df:pd.DataFrame, eea_shapefile_path):
     return df
 
 
-def standardize_data(df:pd.DataFrame, path_translator_species_names, eea_shapefile_path, adjust_ids=False, path_translator_species_ids=None, date_format='%Y-%m-%d'):
+def standardize_data(df:pd.DataFrame, path_translator_species_names, eea_shapefile_path, adjust_ids=False, path_translator_species_ids=None, date_format='%Y-%m-%d') -> pd.DataFrame:
     """
     Modifies the dataframes from ornitho to our standard data pattern
     """
@@ -109,3 +143,15 @@ def standardize_data(df:pd.DataFrame, path_translator_species_names, eea_shapefi
     if adjust_ids:
         df = standardize_id_species(df, path_translator_species_ids)
     return df
+
+
+def extract_digits_from_str(input_string):
+    result_string = ''.join(filter(str.isdigit, input_string))
+    return int(result_string)
+
+
+def numerize_eea_grids(grid_ids: pd.Series) -> pd.Series:
+    """
+    Converts the EEA grid ids to numeric values.
+    """
+    return grid_ids.apply(extract_digits_from_str)
