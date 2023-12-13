@@ -37,7 +37,7 @@ def condense_atlas_codes(codes: pd.Series) -> pd.Series:
     return codes.apply(map_atlas_code)
 
 
-def get_delimiter(file_path, bytes = 4096):
+def get_delimiter(file_path:str, bytes = 4096):
     sniffer = csv.Sniffer()
     data = open(file_path, 'r').read(bytes)
     delimiter = sniffer.sniff(data).delimiter
@@ -68,7 +68,7 @@ def standardize_column_names(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def standardize_date_format(df:pd.DataFrame, format) -> pd.DataFrame:
+def standardize_date_format(df:pd.DataFrame, format:str) -> pd.DataFrame:
     """
     Changes the date format to our standardized format yyyy-mm-dd.
     """
@@ -89,7 +89,7 @@ def standardize_precisions(df:pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def standardize_id_species(df:pd.DataFrame, path_to_lookup_table)  -> pd.DataFrame:
+def standardize_id_species(df:pd.DataFrame, path_to_lookup_table:str)  -> pd.DataFrame:
     """
     Changes german species id to standardized species id's given by 'translation_species_id_de_vs_ch.csv'
     """
@@ -99,7 +99,7 @@ def standardize_id_species(df:pd.DataFrame, path_to_lookup_table)  -> pd.DataFra
     return df
 
 
-def standardize_name_species(df:pd.DataFrame, path_to_lookup_table)  -> pd.DataFrame:
+def standardize_name_species(df:pd.DataFrame, path_to_lookup_table:str)  -> pd.DataFrame:
     """
     Changes swiss species names to standardized names given by 'translation_species_names_de_vs_ch.csv'
     """
@@ -109,7 +109,7 @@ def standardize_name_species(df:pd.DataFrame, path_to_lookup_table)  -> pd.DataF
     return df
 
 
-def assign_eea_grids(df:pd.DataFrame, eea_shapefile_path)  -> pd.DataFrame:
+def assign_eea_grids(df:pd.DataFrame, eea_shapefile_path:str)  -> pd.DataFrame:
     """
     Assigns an eea grid id to every data point based on the provided shapefile.
     """
@@ -130,22 +130,23 @@ def assign_eea_grids(df:pd.DataFrame, eea_shapefile_path)  -> pd.DataFrame:
     return df
 
 
-def standardize_data(df:pd.DataFrame, path_translator_species_names, eea_shapefile_path, adjust_ids=False, path_translator_species_ids=None, date_format='%Y-%m-%d') -> pd.DataFrame:
+def standardize_data(df:pd.DataFrame, path_translator_species_names:str, adjust_ids=False, path_translator_species_ids=None, date_format='%Y-%m-%d') -> pd.DataFrame:
     """
     Modifies the dataframes from ornitho to our standard data pattern
     """
+    if 'estimation_code' in df.columns:
+        df.drop(columns=['estimation_code'], inplace=True)
     df = standardize_column_names(df)
     df = standardize_dtypes(df)
     df = standardize_date_format(df, format=date_format)
     df = standardize_precisions(df)
     df = standardize_name_species(df, path_to_lookup_table=path_translator_species_names)
-    df = assign_eea_grids(df, eea_shapefile_path=eea_shapefile_path)
     if adjust_ids:
         df = standardize_id_species(df, path_translator_species_ids)
     return df
 
 
-def extract_digits_from_str(input_string):
+def extract_digits_from_str(input_string:str):
     result_string = ''.join(filter(str.isdigit, input_string))
     return int(result_string)
 
