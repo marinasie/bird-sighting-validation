@@ -7,3 +7,4 @@ scikit-learn~=1.2.2
 geojson~=3.0.1
 shap~=0.42.1
 pyod~=1.1.2
+kaleido~=0.2.1
