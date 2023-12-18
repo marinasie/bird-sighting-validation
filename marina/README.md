@@ -4,7 +4,6 @@ In this subsection, all notebooks related to data preparation, model design, and
 <br
 
 ## Structure
-The structure is as follows:
 
 **Part of Grundprojekt:**
 - `01_data_preparation` This folder contains all data preparation notebooks. They document and execute the step-by-step process from raw data to the datasets used for model training. Further, a summary for developers is provided.
