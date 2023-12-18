@@ -30,12 +30,12 @@ Use `.html` files to:
 
 ## Setup
 
-### 1. Clone repository
+#### 1. Clone repository
 
 ```console
 git clone https://github.com/marinasie/bird-sighting-validation.git
 ```
-### 2. Install dependencies
+#### 2. Install dependencies
 
 ```
 cd bird-sighting-validation/marina/
