@@ -1,7 +1,10 @@
 <img src="../img/README_marina.png" alt="A buzzard" style="width: 100%; border-radius: 20px;"/>
 
-## Scope
-In this section, all notebooks related to data preparation, model design, and model evaluation for identifying anomalous bird observations in data from *ornitho.ch* and *ornitho.de* are collected. The structure is as follows:
+In this subsection, all notebooks related to data preparation, model design, and model evaluation for identifying anomalous bird observations in data from *ornitho.ch* and *ornitho.de* are collected.
+<br
+
+## Structure
+The structure is as follows:
 
 **Part of Grundprojekt:**
 - `01_data_preparation` This folder contains all data preparation notebooks. They document and execute the step-by-step process from raw data to the datasets used for model training. Further, a summary for developers is provided.
