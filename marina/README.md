@@ -1,7 +1,7 @@
 <img src="../img/README_marina.png" alt="A buzzard" style="width: 100%; border-radius: 20px;"/>
 
 In this subsection, all notebooks related to data preparation, model design, and model evaluation for identifying anomalous bird observations in data from *ornitho.ch* and *ornitho.de* are collected.
-<br
+<br>
 
 ## Structure
 
