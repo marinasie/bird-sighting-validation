@@ -1,6 +1,5 @@
 <img src="../img/README_marina.png" alt="A buzzard" style="width: 100%; border-radius: 20px;"/>
 
-<br><br>
 ## Scope
 In this section, all notebooks related to data preparation, model design, and model evaluation for identifying anomalous bird observations in data from *ornitho.ch* and *ornitho.de* are collected. The structure is as follows:
 
@@ -21,17 +20,13 @@ All data can be found here: https://drive.google.com/drive/folders/1Of664UN6K9zs
 ## Provided file types
 Each Notebook is provided as `.ipynb` and as `.html`. 
 
-Use `.ipynb` to:
+Use `.ipynb` files to:
 - run the code locally
 - view the executed notebook with static outputs on GitHub
 
-Use `.html` to:
+Use `.html` files to:
 - view the executed notebook with interactive plots locally
-
-
-
 <br><br><br>
-
 
 ## Setup
 
