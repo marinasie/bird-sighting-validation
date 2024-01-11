@@ -83,7 +83,14 @@ def standardize_precisions(df:pd.DataFrame) -> pd.DataFrame:
     """
     precisions = {'Exakte Lokalisierung': 'precise',
                   'Kilometerquadrat': 'square',
-                  'Ort': 'place'}
+                  'Ort': 'place',
+                  'Halbminutenfeld': 'square',
+                  'exakte Lokalisierung (Linie)': 'precise',
+                  'exakte Lokalisierung (Polygon)': 'precise',
+                  'exakte Lokalisierung (Punkt)': 'precise',
+                  'Polygon': 'square',
+                  'Punkt': 'precise',
+                  'Transekt': 'square'}
     df.precision = df.precision.map(precisions).fillna(df.precision)
     df = df[df.precision.isin(['precise', 'square', 'place'])]
     return df
