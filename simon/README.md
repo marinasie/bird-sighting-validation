@@ -8,7 +8,7 @@ In this subsection, all notebooks related to Feature Generation and Explorative 
 **Part of Grundprojekt:**
 - `data_analysis` This folder contains the data analysis.
 
-- `feature_generation` This folder includes all the notebooks for feature generation. This includes, land use generation with LUCAS and CLC, weather generation and altitude generation.
+- `feature_generation` This folder includes all the notebooks for feature generation. This includes, land cover generation with LUCAS and CLC, weather generation and altitude generation.
 
 - `utils` In this folder are some utility files like the .py file to generate the altitude with CopernicusDEM.
 
