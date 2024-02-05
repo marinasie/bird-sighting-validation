@@ -19,3 +19,4 @@ pyod==1.1.2
 scikit_learn==1.4.0
 jupyter-core==5.5.0
 jupyter-client==8.6.0
+notebook==4.0.1
