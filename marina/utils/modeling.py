@@ -172,6 +172,8 @@ def get_confusion_matrix_values(conf_matrices):
     FNs = [mat[1, 0] for mat in conf_matrices]  # False Negatives
     return TPs, TNs, FPs, FNs
 
+def get_sensitivity()
+
 
 def circular_rolling(group):
     """Helper function to calculate Emergent Filters."""
