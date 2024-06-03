@@ -62,7 +62,7 @@ def calculate_drift_over_years(data, current, years, analyzed_features):
                 result = metric['result']
                 drift_by_columns = result['drift_by_columns']
                 for column_name, column_data in drift_by_columns.items():
-                    if column_name == 'eea_grid_id':
+                    if column_name == analyzed_features[0]:
                         drift_score = column_data['drift_score']
                         drift_results.append(drift_score)
     return drift_results
