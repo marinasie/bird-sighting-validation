@@ -225,6 +225,17 @@ def plot_change_points(data: pd.DataFrame, change_points: List[int], title: str,
     fig.show()
 
 
+def plot_time_series(data: pd.DataFrame, title: str):
+    """
+    Plots the change points on a line plot, along with the time series data.
+    """
+    fig = px.line(data, x='date', y='n_sightings', title=title, color_discrete_sequence=['#55a630'])
+    fig.update_xaxes(title_text='Date')
+    fig.update_yaxes(title_text='Number of Sightings')
+    fig.update_layout(width=800, height=300)
+    fig.show()
+
+
 def plot_change_points_per_year(data: pd.DataFrame, change_points: List[int], title: str, legend_title: str, show_first_sighting=False):
     """
     Plots the change points on a line plot, along with the time series data, creating one line per year and overlaying these.
