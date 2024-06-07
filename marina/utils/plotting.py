@@ -3,7 +3,7 @@ Outsources plotting functions used in the notebooks.
 """
 
 import io
-from typing import List
+from typing import List, Dict
 
 import numpy as np
 import pandas as pd
@@ -205,7 +205,8 @@ def plot_drift_over_years(habitat_drift_results, years, title):
                     width=600, height=300)
     fig.show()
 
-def plot_change_points(data: pd.DataFrame, change_points: List[int], title: str, legend_title: str):
+
+def plot_change_points(data: pd.DataFrame, change_points_dict: Dict[str, List[int]], title: str):
     """
     Plots the change points on a line plot, along with the time series data.
     """
@@ -213,16 +214,22 @@ def plot_change_points(data: pd.DataFrame, change_points: List[int], title: str,
     fig.update_xaxes(title_text='Date')
     fig.update_yaxes(title_text='Number of Sightings')
 
+    colors = ['red', 'blue', 'green', 'orange', 'purple']
 
-    for idx in change_points:
-        fig.add_vline(x=data['date'][idx], line_width=1, line_dash="dash", line_color="red")
+    for i, (algo, points) in enumerate(change_points_dict.items()):
+        for idx in points:
+            fig.add_vline(x=data['date'][idx], line_width=1, line_dash="dash", line_color=colors[i])
 
-    fig.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color='red', width=2, dash='dash'), showlegend=True, name=legend_title))
+        fig.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color=colors[i], width=2, dash='dash'), showlegend=True, name=algo))
+
     fig.update_layout(xaxis_title='number of sightings', yaxis_title='date',
                     title_x=0.5,
                     font=dict(family="Aleo", size=15, color="#4d5f81"),
-                    legend=dict(x=0.5, y=1, xanchor='center', yanchor='bottom', bgcolor="rgba(255, 255, 255, 0.6)"))
+                    legend=dict(x=0.5, y=1, xanchor='center', yanchor='bottom', bgcolor="rgba(255, 255, 255, 0.6)"),
+                    legend_orientation="h")
     fig.show()
+
+
 
 
 def plot_time_series(data: pd.DataFrame, title: str):
