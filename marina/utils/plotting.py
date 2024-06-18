@@ -222,7 +222,7 @@ def plot_change_points(data: pd.DataFrame, change_points_dict: Dict[str, List[in
 
         fig.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color=colors[i], width=2, dash='dash'), showlegend=True, name=algo))
 
-    fig.update_layout(xaxis_title='number of sightings', yaxis_title='date',
+    fig.update_layout(xaxis_title='date', yaxis_title='number of sightings',
                     title_x=0.5,
                     font=dict(family="Aleo", size=15, color="#4d5f81"),
                     legend=dict(x=0.5, y=1, xanchor='center', yanchor='bottom', bgcolor="rgba(255, 255, 255, 0.6)"),
