@@ -8,10 +8,10 @@ In this subsection, all notebooks related to data preparation, model design, and
 **Part of Grundprojekt:**
 - `01_data_preparation` This folder contains all data preparation notebooks. They document and execute the step-by-step process from raw data to the datasets used for model training. Further, a summary for developers is provided.
 
-- `02_modeling` This folder includes all modeling approaches for the identification of anomalous bird observations. This encompasses the implementation of Emergent Filters, as well as the development of Outlier Detection ML algorithms such as DBSCAN, Isolation Forest, and AutoEncoder. Evaluation and tuning are not part of this section; they are conducted in `03_evaluation`.
+- `02_modeling` This folder includes all modeling approaches for the identification of anomalous bird observations. This encompasses the implementation of Emergent Filters, as well as the development of Outlier Detection ML algorithms such as DBSCAN, Isolation Forest, and AutoEncoder. Evaluation and tuning are not part of this section; they will be conducted by @Simon Birker.
 
 **Part of Hauptprojekt:**
-- `03_evaluation` In this folder, the study examining the performance of the models designed in `02_modeling` can be found. Improvement possibilities are identified, and the suitability of the models is assessed and compared.
+- `04_drift_analysis` In this folder, all notebooks related to drift analysis are collected, including data drift analysis, time series construction, preprocessing, and drift detection.
 <br><br><br>
 
 ## Dataset Download

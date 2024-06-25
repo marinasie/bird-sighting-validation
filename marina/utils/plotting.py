@@ -206,7 +206,7 @@ def plot_drift_over_years(habitat_drift_results, years, title):
     fig.show()
 
 
-def plot_change_points(data: pd.DataFrame, change_points_dict: Dict[str, List[int]], title: str):
+def plot_change_points(data: pd.DataFrame, change_points: List[int], title: str):
     """
     Plots the change points on a line plot, along with the time series data.
     """
@@ -214,13 +214,9 @@ def plot_change_points(data: pd.DataFrame, change_points_dict: Dict[str, List[in
     fig.update_xaxes(title_text='Date')
     fig.update_yaxes(title_text='Number of Sightings')
 
-    colors = ['red', 'blue', 'green', 'orange', 'purple']
-
-    for i, (algo, points) in enumerate(change_points_dict.items()):
-        for idx in points:
-            fig.add_vline(x=data['date'][idx], line_width=1, line_dash="dash", line_color=colors[i])
-
-        fig.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color=colors[i], width=2, dash='dash'), showlegend=True, name=algo))
+    for idx in change_points:
+        fig.add_vline(x=data['date'][idx], line_width=1, line_dash="dash", line_color='red')
+    fig.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color='red', width=2, dash='dash'), showlegend=True, name='Change Point (KSWIN)'))
 
     fig.update_layout(xaxis_title='date', yaxis_title='number of sightings',
                     title_x=0.5,
