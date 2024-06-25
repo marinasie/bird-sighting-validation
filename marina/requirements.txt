@@ -11,3 +11,4 @@ kaleido~=0.1.0
 tensorflow~=2.14.0
 ipykernel~=6.23.1
 jupyter==1.0.0
+evidently~=0.4.17
