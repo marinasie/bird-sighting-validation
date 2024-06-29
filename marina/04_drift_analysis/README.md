@@ -1,4 +1,4 @@
-<img src="img/waxwing.png" alt="Drift Analysis" style="width: 100%; border-radius: 20px;"/>
+<img src="../../img/waxwing.png" alt="Drift Analysis" style="width: 100%; border-radius: 20px;"/>
 <br><br>
 
 In this subsection, all notebooks related to drift analysis are collected.
