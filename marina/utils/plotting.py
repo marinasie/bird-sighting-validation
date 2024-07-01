@@ -272,3 +272,65 @@ def plot_change_points_per_year(data: pd.DataFrame, change_points: List[int], ti
     fig.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color='red', width=2, dash='dash'), showlegend=True, name=legend_title))
 
     fig.show()
+
+
+
+def plot_sighting_ratios_over_year(df: pd.DataFrame, title: str):
+    """
+    Plot the sighting ratios over the years for a given species and grid.
+    df: DataFrame with sighting ratios for a species and grid, holding columns 'decade', 'sighting_ratio', 'year'.
+    """
+    fig = px.line(df, x='decade', y='sighting_ratio', color='year', color_discrete_sequence=px.colors.qualitative.Pastel)
+
+    fig.update_layout(
+        xaxis=dict(title='', showticklabels=False, range=[df['decade'].min(), df['decade'].max()]),
+        yaxis=dict(title='sighting ratio'),
+        font=dict(family="Aleo", size=15, color="#4d5f81"),
+        title={
+            'text': title,
+            'x': 0.5,
+            'xanchor': 'center',
+        })
+
+    for i in range(len(fig.data)):
+        color = fig.data[i].line.color
+        color = color.replace("rgb", "rgba").replace(")", ", 0.1)")
+        fig.data[i].update(line_shape='spline', fill='tozeroy', mode='lines', fillcolor=color)
+
+        for j in range(len(fig.data[i].x)):
+            fig.add_shape(
+                type="line",
+                x0=fig.data[i].x[j], y0=0,
+                x1=fig.data[i].x[j], y1=fig.data[i].y[j],
+                line=dict(color=color.replace(", 0.1)", ", 0.5)"), width=15),
+            )
+
+    timeline_data = pd.DataFrame({
+        'month': pd.date_range(start='2023-01-01', periods=13, freq='M'),
+        'value': range(0, 13)
+    })
+    timeline_data['month_abbr'] = timeline_data['month'].dt.strftime('%b')
+
+    fig.update_layout(
+        xaxis2=dict(
+            title='month',
+            overlaying='x',
+            side='bottom',
+            tickvals=timeline_data['month'],
+            ticktext=timeline_data['month_abbr'],
+            anchor='y',
+            position=0,
+            range=[timeline_data['month'].min(), timeline_data['month'].max()]
+        )
+    )
+
+    timeline_scatter = go.Scatter(
+        x=timeline_data['month'],
+        y=[0] * len(timeline_data), 
+        mode='markers',
+        xaxis='x2',
+        showlegend=False, 
+        marker=dict(color='rgba(0,0,0,0)')
+    )
+    fig.add_trace(timeline_scatter)
+    fig.show()
