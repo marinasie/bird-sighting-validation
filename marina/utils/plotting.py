@@ -278,12 +278,12 @@ def plot_change_points_per_year(data: pd.DataFrame, change_points: List[int], ti
 def plot_sighting_ratios_over_year(df: pd.DataFrame, title: str):
     """
     Plot the sighting ratios over the years for a given species and grid.
-    df: DataFrame with sighting ratios for a species and grid, holding columns 'decade', 'sighting_ratio', 'year'.
+    df: DataFrame with sighting ratios for a species and grid, holding columns 'week', 'sighting_ratio', 'year'.
     """
-    fig = px.line(df, x='decade', y='sighting_ratio', color='year', color_discrete_sequence=px.colors.qualitative.Pastel)
+    fig = px.line(df, x='week', y='sighting_ratio', color='year', color_discrete_sequence=px.colors.qualitative.Pastel)
 
     fig.update_layout(
-        xaxis=dict(title='', showticklabels=False, range=[df['decade'].min(), df['decade'].max()]),
+        xaxis=dict(title='', showticklabels=False, range=[df['week'].min(), df['week'].max()]),
         yaxis=dict(title='sighting ratio'),
         font=dict(family="Aleo", size=15, color="#4d5f81"),
         title={
